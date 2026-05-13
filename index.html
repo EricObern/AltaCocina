@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Institutional Restaurant Proforma & Capital Planner</title>
+    <title>Restaurant Financial Model & Proforma</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f6; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; }
         .input-group { margin-bottom: 1rem; }
-        .input-group label { display: block; font-size: 0.75rem; font-weight: 600; color: #4a5568; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
-        .input-group input { width: 100%; padding: 0.5rem; border: 1px solid #cbd5e0; border-radius: 0.375rem; font-family: 'SFMono-Regular', Consolas, "Liberation Mono", Menlo, monospace; font-size: 0.875rem; }
-        .input-group input:focus { outline: none; border-color: #2b6cb0; box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.2); }
-        .table-header { background-color: #1a202c; color: #fff; }
-        .metric-card { background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%); color: white; }
-        .explanation-card { background-color: white; border-left: 4px solid #2b6cb0; }
+        .input-group label { display: block; font-size: 0.75rem; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+        .input-group input { width: 100%; padding: 0.5rem; border: 1px solid #cbd5e1; border-radius: 0.375rem; font-family: 'SFMono-Regular', Consolas, "Liberation Mono", Menlo, monospace; font-size: 0.875rem; color: #0f172a; }
+        .input-group input:focus { outline: none; border-color: #475569; box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.2); }
+        .table-header { background-color: #1e293b; color: #f8fafc; }
+        .metric-card { background-color: #1e293b; color: #f8fafc; }
+        .explanation-card { background-color: white; border-left: 4px solid #475569; }
     </style>
 </head>
-<body class="text-gray-800 antialiased pb-20">
+<body class="text-slate-800 antialiased pb-20">
 
 <div class="max-w-screen-2xl mx-auto p-4 sm:p-8">
     
-    <header class="mb-8 border-b border-gray-300 pb-4">
-        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Restaurant Unit Economics & 5-Year Proforma</h1>
-        <p class="text-sm text-gray-500 mt-1">Interactive Financial Modeling Tool • PE-Grade Calculation Matrix</p>
+    <header class="mb-8 border-b border-slate-300 pb-4">
+        <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Restaurant Financial Model & Proforma</h1>
+        <p class="text-sm text-slate-500 mt-1">Comprehensive Unit Economic Analysis • 5-Year Projection</p>
     </header>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
@@ -31,34 +31,36 @@
         <div class="lg:col-span-4 space-y-6">
             
             <!-- Capital & Setup -->
-            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
-                <h2 class="text-lg font-bold text-gray-800 border-b pb-2 mb-4">1. CapEx & Financing</h2>
+            <div class="bg-white p-5 rounded-lg shadow-sm border border-slate-200">
+                <h2 class="text-lg font-bold text-slate-800 border-b pb-2 mb-4">1. Capital Expenditure & Financing</h2>
                 <div class="grid grid-cols-2 gap-4">
                     <div class="input-group"><label>Buildout / T.I. ($)</label><input type="number" id="inp-buildout" value="450000"></div>
-                    <div class="input-group"><label>FF&E (Eqpt/Fur) ($)</label><input type="number" id="inp-ffe" value="250000"></div>
-                    <div class="input-group"><label>Working Capital ($)</label><input type="number" id="inp-working-cap" value="100000"></div>
+                    <div class="input-group"><label>FF&E (Eqpt) ($)</label><input type="number" id="inp-ffe" value="250000"></div>
+                    <div class="input-group"><label>Pre-Opening Costs ($)</label><input type="number" id="inp-preopen" value="75000"></div>
+                    <div class="input-group"><label>Working Capital ($)</label><input type="number" id="inp-working-cap" value="75000"></div>
                     <div class="input-group"><label>Depreciation (Yrs)</label><input type="number" id="inp-dep-yrs" value="7"></div>
-                    <div class="input-group"><label>Debt Financed ($)</label><input type="number" id="inp-debt" value="400000"></div>
+                    <div class="input-group"><label>Corp Tax Rate (%)</label><input type="number" id="inp-tax-rate" value="21"></div>
+                    <div class="input-group"><label>Debt Financed ($)</label><input type="number" id="inp-debt" value="0"></div>
                     <div class="input-group"><label>Interest Rate (%)</label><input type="number" id="inp-interest" value="8.5" step="0.1"></div>
                     <div class="input-group"><label>Loan Term (Yrs)</label><input type="number" id="inp-loan-term" value="5"></div>
-                    <div class="input-group"><label>Corp Tax Rate (%)</label><input type="number" id="inp-tax-rate" value="21"></div>
                 </div>
             </div>
 
             <!-- Revenue Drivers -->
-            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
-                <h2 class="text-lg font-bold text-gray-800 border-b pb-2 mb-4">2. Revenue Drivers</h2>
+            <div class="bg-white p-5 rounded-lg shadow-sm border border-slate-200">
+                <h2 class="text-lg font-bold text-slate-800 border-b pb-2 mb-4">2. Revenue Drivers</h2>
                 <div class="grid grid-cols-2 gap-4">
                     <div class="input-group"><label>Daily Covers/Txns</label><input type="number" id="inp-covers" value="350"></div>
                     <div class="input-group"><label>Average Check ($)</label><input type="number" id="inp-check" value="28"></div>
                     <div class="input-group"><label>Days Open / Year</label><input type="number" id="inp-days" value="350"></div>
+                    <div class="input-group"><label>Other Rev ($/Mo)</label><input type="number" id="inp-other-rev" value="2500"></div>
                     <div class="input-group"><label>YOY Sales Growth (%)</label><input type="number" id="inp-growth" value="4.0" step="0.1"></div>
                 </div>
             </div>
 
             <!-- Direct Costs (COGS & Labor) -->
-            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
-                <h2 class="text-lg font-bold text-gray-800 border-b pb-2 mb-4">3. Prime Costs (COGS & Labor)</h2>
+            <div class="bg-white p-5 rounded-lg shadow-sm border border-slate-200">
+                <h2 class="text-lg font-bold text-slate-800 border-b pb-2 mb-4">3. Prime Costs</h2>
                 <div class="grid grid-cols-2 gap-4">
                     <div class="input-group"><label>Food & Bev Cost (%)</label><input type="number" id="inp-cogs" value="28.5" step="0.1"></div>
                     <div class="input-group"><label>Paper & Pkg (%)</label><input type="number" id="inp-paper" value="2.0" step="0.1"></div>
@@ -70,8 +72,8 @@
             </div>
 
             <!-- OpEx -->
-            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
-                <h2 class="text-lg font-bold text-gray-800 border-b pb-2 mb-4">4. Operating Expenses (OPEX)</h2>
+            <div class="bg-white p-5 rounded-lg shadow-sm border border-slate-200">
+                <h2 class="text-lg font-bold text-slate-800 border-b pb-2 mb-4">4. Operating Expenses (OPEX)</h2>
                 <div class="grid grid-cols-2 gap-4">
                     <div class="input-group"><label>Rent & NNN ($/Mo)</label><input type="number" id="inp-rent" value="8500"></div>
                     <div class="input-group"><label>Utilities ($/Mo)</label><input type="number" id="inp-util" value="2500"></div>
@@ -89,48 +91,48 @@
         <!-- RIGHT COLUMN: OUTPUTS & PROFORMA -->
         <div class="lg:col-span-8 space-y-6">
             
-            <!-- Dashboard Key Metrics -->
+            <!-- Overarching Dashboard Metrics -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div class="metric-card p-4 rounded-lg shadow">
-                    <p class="text-xs font-bold uppercase tracking-wider opacity-80">Total Capital Needed</p>
-                    <h3 class="text-2xl font-mono mt-1" id="out-total-cap">$0</h3>
-                    <p class="text-xs mt-1" id="out-equity-req">Equity: $0</p>
+                <div class="metric-card p-4 rounded-lg shadow-sm">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Total Capital Required</p>
+                    <h3 class="text-2xl font-mono" id="out-total-cap">$0</h3>
+                    <p class="text-xs mt-1 text-slate-400" id="out-equity-req">Equity: $0</p>
                 </div>
-                <div class="metric-card p-4 rounded-lg shadow">
-                    <p class="text-xs font-bold uppercase tracking-wider opacity-80">Year 1 EBITDA</p>
-                    <h3 class="text-2xl font-mono mt-1" id="out-y1-ebitda">$0</h3>
-                    <p class="text-xs mt-1" id="out-y1-ebitda-pct">Margin: 0%</p>
+                <div class="metric-card p-4 rounded-lg shadow-sm">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Annual Break-Even Sales</p>
+                    <h3 class="text-2xl font-mono" id="out-breakeven">$0</h3>
+                    <p class="text-xs mt-1 text-slate-400" id="out-breakeven-daily">$0 / Day</p>
                 </div>
-                <div class="metric-card p-4 rounded-lg shadow">
-                    <p class="text-xs font-bold uppercase tracking-wider opacity-80">Prime Cost (Y1)</p>
-                    <h3 class="text-2xl font-mono mt-1" id="out-prime-pct">0%</h3>
-                    <p class="text-xs mt-1">Target: < 60%</p>
+                <div class="metric-card p-4 rounded-lg shadow-sm">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Cumulative 5-Yr FCF</p>
+                    <h3 class="text-2xl font-mono" id="out-5yr-fcf">$0</h3>
+                    <p class="text-xs mt-1 text-slate-400">Total Cash Generated</p>
                 </div>
-                <div class="metric-card p-4 rounded-lg shadow">
-                    <p class="text-xs font-bold uppercase tracking-wider opacity-80">Payback Period</p>
-                    <h3 class="text-2xl font-mono mt-1" id="out-payback">0 Yrs</h3>
-                    <p class="text-xs mt-1" id="out-coc">Cash-on-Cash: 0%</p>
+                <div class="metric-card p-4 rounded-lg shadow-sm">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Project Payback Period</p>
+                    <h3 class="text-2xl font-mono" id="out-payback">0 Yrs</h3>
+                    <p class="text-xs mt-1 text-slate-400" id="out-coc">Avg Cash-on-Cash: 0%</p>
                 </div>
             </div>
 
             <!-- Proforma Table (Raw Dollars) -->
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                <div class="p-4 border-b border-gray-200 bg-gray-50">
-                    <h2 class="text-lg font-bold text-gray-800">5-Year Financial Proforma (Raw Dollars)</h2>
+            <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-4 border-b border-slate-200 bg-slate-50">
+                    <h2 class="text-lg font-bold text-slate-800">5-Year Financial Proforma</h2>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-right font-mono whitespace-nowrap">
                         <thead class="table-header">
                             <tr>
-                                <th class="text-left p-3">P&L Item</th>
-                                <th class="p-3">Year 1</th>
-                                <th class="p-3">Year 2</th>
-                                <th class="p-3">Year 3</th>
-                                <th class="p-3">Year 4</th>
-                                <th class="p-3">Year 5</th>
+                                <th class="text-left p-3 font-semibold">P&L Item</th>
+                                <th class="p-3 font-semibold">Year 1</th>
+                                <th class="p-3 font-semibold">Year 2</th>
+                                <th class="p-3 font-semibold">Year 3</th>
+                                <th class="p-3 font-semibold">Year 4</th>
+                                <th class="p-3 font-semibold">Year 5</th>
                             </tr>
                         </thead>
-                        <tbody id="proforma-body" class="divide-y divide-gray-200">
+                        <tbody id="proforma-body" class="divide-y divide-slate-200">
                             <!-- Injected by JavaScript -->
                         </tbody>
                     </table>
@@ -138,23 +140,23 @@
             </div>
 
             <!-- Proforma Table (Percentages & Ratios) -->
-            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mt-6">
-                <div class="p-4 border-b border-gray-200 bg-gray-50 flex justify-between items-center">
-                    <h2 class="text-lg font-bold text-gray-800">YOY Margins & Financial Health Ratios</h2>
+            <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden mt-6">
+                <div class="p-4 border-b border-slate-200 bg-slate-50">
+                    <h2 class="text-lg font-bold text-slate-800">Unit Margins & Efficiency Ratios</h2>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-right font-mono whitespace-nowrap">
                         <thead class="table-header">
                             <tr>
-                                <th class="text-left p-3">Metric / Ratio</th>
-                                <th class="p-3">Year 1</th>
-                                <th class="p-3">Year 2</th>
-                                <th class="p-3">Year 3</th>
-                                <th class="p-3">Year 4</th>
-                                <th class="p-3">Year 5</th>
+                                <th class="text-left p-3 font-semibold">Metric / Ratio</th>
+                                <th class="p-3 font-semibold">Year 1</th>
+                                <th class="p-3 font-semibold">Year 2</th>
+                                <th class="p-3 font-semibold">Year 3</th>
+                                <th class="p-3 font-semibold">Year 4</th>
+                                <th class="p-3 font-semibold">Year 5</th>
                             </tr>
                         </thead>
-                        <tbody id="ratios-body" class="divide-y divide-gray-200">
+                        <tbody id="ratios-body" class="divide-y divide-slate-200">
                             <!-- Injected by JavaScript -->
                         </tbody>
                     </table>
@@ -164,60 +166,54 @@
         </div>
     </div>
 
-    <!-- METHODOLOGY & GLOSSARY SECTION -->
-    <div class="border-t border-gray-300 pt-10">
-        <h2 class="text-2xl font-extrabold text-gray-900 mb-6 tracking-tight">Methodology & Financial Glossary</h2>
-        <p class="text-gray-600 mb-8 max-w-4xl">
-            This tool bridges the gap between daily restaurant operations and institutional private equity logic. When evaluating the viability of a concept or approaching a bank for funding, understanding *why* these numbers interact is as important as the numbers themselves. Here is a clear explanation of the forces at play.
+    <!-- CLINICAL METHODOLOGY & EXPLANATION SECTION -->
+    <div class="border-t border-slate-300 pt-10">
+        <h2 class="text-2xl font-extrabold text-slate-900 mb-6 tracking-tight">Methodology & Variable Explanations</h2>
+        <p class="text-slate-600 mb-8 max-w-4xl leading-relaxed">
+            This model evaluates the mathematical viability of a restaurant concept independent of its specific capital structure. Whether fully self-funded, backed by external equity partners, or utilizing commercial debt, the underlying unit economics determine the success of the operation. Below is an overview of the core variables and calculations used.
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             <div class="explanation-card p-5 shadow-sm rounded-r-lg">
-                <h3 class="font-bold text-gray-800 text-lg mb-2">Prime Costs (The Operator's Pulse)</h3>
-                <p class="text-sm text-gray-600">
-                    <strong>What it is:</strong> Cost of Goods Sold (Food & Paper) + Total Labor (including payroll taxes and benefits).<br><br>
-                    <strong>Why it matters:</strong> This is the most controllable expense in a restaurant. A healthy restaurant **must keep Prime Costs below 60%** of gross sales. If your proforma shows Prime Costs at 65%+, the concept is fundamentally flawed and will likely fail to generate enough cash to cover fixed rent and debt.
+                <h3 class="font-bold text-slate-800 text-lg mb-2">Total Capital Required & Setup Costs</h3>
+                <p class="text-sm text-slate-600">
+                    Calculates the absolute Day-0 cash required to open the doors. This incorporates structural improvements (Buildout), equipment and furniture (FF&E), organizational expenses incurred prior to revenue generation (Pre-Opening Costs like legal, permits, and initial training), and a Working Capital buffer to sustain operations before profitability is achieved.
                 </p>
             </div>
 
             <div class="explanation-card p-5 shadow-sm rounded-r-lg">
-                <h3 class="font-bold text-gray-800 text-lg mb-2">EBITDA vs. Free Cash Flow</h3>
-                <p class="text-sm text-gray-600">
-                    <strong>What it is:</strong> EBITDA (Earnings Before Interest, Taxes, Depreciation, and Amortization) shows the raw operating profit of the concept. Free Cash Flow (FCF) is what is actually left in your bank account.<br><br>
-                    <strong>Why it matters:</strong> Beginners confuse Net Income or EBITDA with cash in their pocket. This tool calculates FCF by taking EBITDA, paying the taxes, and—crucially—subtracting the cash used to pay down the principal balance of your bank loan. 
+                <h3 class="font-bold text-slate-800 text-lg mb-2">Annual Break-Even Sales</h3>
+                <p class="text-sm text-slate-600">
+                    The exact top-line revenue required for the restaurant to yield a net income of $0. This is calculated using the Contribution Margin ratio: Fixed Costs (Rent, Salaries, Utilities, G&A, Interest) divided by the Gross Margin percentage after Variable Costs (COGS, Hourly Labor, Marketing, Maintenance, Credit Card Fees).
                 </p>
             </div>
 
             <div class="explanation-card p-5 shadow-sm rounded-r-lg">
-                <h3 class="font-bold text-gray-800 text-lg mb-2">DSCR (Debt Service Coverage Ratio)</h3>
-                <p class="text-sm text-gray-600">
-                    <strong>What it is:</strong> Your EBITDA divided by your total annual debt payments (Interest + Principal).<br><br>
-                    <strong>Why it matters:</strong> This is the exact metric a bank underwriter uses to approve your loan. A DSCR of 1.0x means you make exactly enough to pay the bank. Banks generally require a **minimum DSCR of 1.25x** to grant a loan, proving you have a 25% buffer if sales drop.
+                <h3 class="font-bold text-slate-800 text-lg mb-2">EBITDA vs. Free Cash Flow (FCF)</h3>
+                <p class="text-sm text-slate-600">
+                    <strong>EBITDA</strong> measures operational profitability before accounting nuances. <strong>Free Cash Flow</strong> represents true liquidity. The model calculates FCF by subtracting corporate taxes and mandatory principal debt repayments from operating income. FCF is the actual capital available for distribution to owners or reinvestment.
                 </p>
             </div>
 
             <div class="explanation-card p-5 shadow-sm rounded-r-lg">
-                <h3 class="font-bold text-gray-800 text-lg mb-2">Cash-on-Cash Return & Payback</h3>
-                <p class="text-sm text-gray-600">
-                    <strong>What it is:</strong> Free Cash Flow divided by the initial Equity (Cash) you put into the deal.<br><br>
-                    <strong>Why it matters:</strong> Private equity firms don't look at total profit; they look at capital efficiency. If you invest $200k in cash and generate $50k in FCF, your Cash-on-Cash return is 25%. The payback period calculates the exact decimal year your cumulative FCF turns positive (meaning you recouped your initial investment). 
+                <h3 class="font-bold text-slate-800 text-lg mb-2">Prime Costs (%)</h3>
+                <p class="text-sm text-slate-600">
+                    The sum of Cost of Goods Sold (food, beverage, packaging) and Total Labor (salaries, hourly wages, payroll taxes, and benefits). A universally recognized benchmark dictates that Prime Costs should remain below 60% of gross revenue to ensure sufficient margin is left to cover fixed overhead.
                 </p>
             </div>
 
             <div class="explanation-card p-5 shadow-sm rounded-r-lg">
-                <h3 class="font-bold text-gray-800 text-lg mb-2">Inflation & Compounding Growth</h3>
-                <p class="text-sm text-gray-600">
-                    <strong>What it is:</strong> Variable costs (COGS, CC fees) scale immediately with sales volume. But fixed OPEX (Rent, Utilities, Admin) generally inflate with time, regardless of how busy you are.<br><br>
-                    <strong>Why it matters:</strong> The tool allows you to adjust "Fixed OPEX Inflation". If Labor grows at 3% a year but Sales only grow at 1%, your EBITDA margin will collapse by Year 3. This exposes the "silent killers" of long-term restaurant viability.
+                <h3 class="font-bold text-slate-800 text-lg mb-2">Capital Efficiency (Payback & ROI)</h3>
+                <p class="text-sm text-slate-600">
+                    <strong>Payback Period</strong> identifies the exact decimal year in which cumulative Free Cash Flow eclipses the initial equity invested. <strong>Cash-on-Cash Return</strong> expresses the annual FCF as a percentage of that initial equity. If the project utilizes $0 in debt, these metrics accurately reflect the return profile of a 100% equity-funded venture.
                 </p>
             </div>
 
             <div class="explanation-card p-5 shadow-sm rounded-r-lg">
-                <h3 class="font-bold text-gray-800 text-lg mb-2">Credit Card Capture</h3>
-                <p class="text-sm text-gray-600">
-                    <strong>What it is:</strong> The percentage of your gross sales paid via credit cards rather than cash.<br><br>
-                    <strong>Why it matters:</strong> In today's landscape, this is typically 90%–98%. Because credit card processors charge ~2.5% to 3.0%, this represents a massive operational expense. You can now adjust this capture rate in the inputs to see how heavily merchant fees eat into your bottom line.
+                <h3 class="font-bold text-slate-800 text-lg mb-2">Inflation & Compounding Drivers</h3>
+                <p class="text-sm text-slate-600">
+                    The model projects asynchronous growth. Revenue and labor scale independently based on user inputs, while fixed operating expenses (Rent, Utilities, Insurance) compound automatically at the specified Fixed OPEX Inflation rate. This accurately stress-tests margin compression over a 5-year horizon.
                 </p>
             </div>
 
@@ -231,13 +227,11 @@
     const fmtPct = (val) => (val * 100).toFixed(1) + '%';
     const fmtDec = (val) => val.toFixed(2) + 'x';
 
-    // Get all inputs and bind the calculation event
     const inputs = document.querySelectorAll('input');
     inputs.forEach(input => input.addEventListener('input', calculateProforma));
 
     function getVal(id) { return parseFloat(document.getElementById(id).value) || 0; }
 
-    // Standard Amortization Formula for Annual Payments
     function pmt(rate, nper, pv) {
         if (rate === 0) return pv / nper;
         if (nper === 0) return 0;
@@ -248,8 +242,9 @@
         // 1. CapEx
         const buildout = getVal('inp-buildout');
         const ffe = getVal('inp-ffe');
+        const preopen = getVal('inp-preopen');
         const workingCap = getVal('inp-working-cap');
-        const totalCap = buildout + ffe + workingCap;
+        const totalCap = buildout + ffe + preopen + workingCap;
         const debt = getVal('inp-debt');
         const equity = Math.max(0, totalCap - debt);
         const depYrs = getVal('inp-dep-yrs');
@@ -258,14 +253,16 @@
         // Debt Math
         const intRate = getVal('inp-interest') / 100;
         const loanTerm = getVal('inp-loan-term');
-        const annualPmt = loanTerm > 0 ? pmt(intRate, loanTerm, debt) : 0;
+        const annualPmt = loanTerm > 0 && debt > 0 ? pmt(intRate, loanTerm, debt) : 0;
         const taxRate = getVal('inp-tax-rate') / 100;
 
         // 2. Revenue Setup
         const covers = getVal('inp-covers');
         const check = getVal('inp-check');
         const days = getVal('inp-days');
-        const salesY1 = covers * check * days;
+        const otherRevAnnual = getVal('inp-other-rev') * 12;
+        const baseSalesY1 = covers * check * days;
+        const salesY1 = baseSalesY1 + otherRevAnnual;
         const revGrowth = getVal('inp-growth') / 100;
 
         // 3. Costs Setup
@@ -289,17 +286,17 @@
         let years = [];
         let ratios = [];
         let remainingDebt = debt;
-        let cumulativeCashFlow = -equity; // For Payback Period calculation
+        let cumulativeCashFlow = -equity;
         let paybackYear = null;
+        let totalFCF = 0;
+        let totalCoc = 0;
 
         for (let i = 1; i <= 5; i++) {
-            // Revenue
-            let sales = salesY1 * Math.pow(1 + revGrowth, i - 1);
+            // Revenue scales, Other Rev remains flat for simplicity
+            let sales = (baseSalesY1 * Math.pow(1 + revGrowth, i - 1)) + otherRevAnnual;
             
-            // COGS
+            // Direct Costs
             let cogs = sales * cogsPct;
-            
-            // Labor
             let currentSalaries = mgtSalaries * Math.pow(1 + laborGrowth, i - 1);
             let currentHourly = hourlyLabor * Math.pow(1 + laborGrowth, i - 1);
             let totalLabor = (currentSalaries + currentHourly) * benefitsPct;
@@ -307,12 +304,11 @@
             let primeCost = cogs + totalLabor;
             let grossProfit = sales - primeCost;
 
-            // Variable OPEX
+            // OPEX
             let marketing = sales * mktPct;
             let rm = sales * rmPct;
             let ccFees = (sales * ccCapture) * ccFeeRate; 
             
-            // Fixed OPEX (Using adjustable inflation variable)
             let currentRent = rentAnnual * Math.pow(1 + opexInf, i - 1);
             let currentUtil = utilAnnual * Math.pow(1 + opexInf, i - 1);
             let currentGA = gaAnnual * Math.pow(1 + opexInf, i - 1);
@@ -322,7 +318,7 @@
             // EBITDA
             let ebitda = grossProfit - totalOpex;
 
-            // Interest & Principal
+            // Debt Service
             let interestPmt = 0;
             let principalPmt = 0;
             if (i <= loanTerm && remainingDebt > 0) {
@@ -331,20 +327,17 @@
                 remainingDebt -= principalPmt;
             }
 
-            // Depreciation mapping
+            // Tax & Net Income
             let currentDep = i <= depYrs ? annualDep : 0;
-
-            // EBT & Taxes
             let ebt = ebitda - interestPmt - currentDep;
             let taxes = ebt > 0 ? ebt * taxRate : 0;
-
-            // Net Income
             let netIncome = ebt - taxes;
 
-            // Free Cash Flow
+            // FCF
             let fcf = netIncome + currentDep - principalPmt;
+            totalFCF += fcf;
 
-            // Payback Period Logic
+            // Payback Period
             cumulativeCashFlow += fcf;
             if (cumulativeCashFlow >= 0 && paybackYear === null) {
                 let previousCash = cumulativeCashFlow - fcf;
@@ -352,14 +345,17 @@
                 paybackYear = (i - 1) + fraction;
             }
 
-            // Store Raw Dollars
+            let coc = equity > 0 ? (fcf / equity) : 0;
+            totalCoc += coc;
+
+            // Store Raw Data
             years.push({
                 sales, cogs, totalLabor, primeCost, grossProfit, 
                 totalOpex, ebitda, currentDep, interestPmt, principalPmt, 
                 taxes, netIncome, fcf
             });
 
-            // Store Ratios for KPI Table
+            // Store Ratios
             let dscr = (annualPmt > 0 && i <= loanTerm) ? (ebitda / annualPmt) : null;
             ratios.push({
                 cogsPct: cogs / sales,
@@ -367,74 +363,83 @@
                 primeCostPct: primeCost / sales,
                 ebitdaMargin: ebitda / sales,
                 fcfMargin: fcf / sales,
-                coc: equity > 0 ? (fcf / equity) : null,
+                coc: equity > 0 ? coc : null,
                 dscr: dscr
             });
         }
 
+        // --- Calculate Year 1 Break-Even ---
+        // Variable Costs: COGS + Hourly Labor (inc tax/ben) + Marketing + R&M + CC Fees
+        let varCostY1 = years[0].cogs + (hourlyLabor * benefitsPct) + (years[0].sales * mktPct) + (years[0].sales * rmPct) + ((years[0].sales * ccCapture) * ccFeeRate);
+        let varCostRatio = varCostY1 / years[0].sales;
+        // Fixed Costs: Salaries + Rent + Util + G&A + Interest
+        let fixedCostY1 = (mgtSalaries * benefitsPct) + rentAnnual + utilAnnual + gaAnnual + years[0].interestPmt;
+        
+        let breakEvenAnnual = varCostRatio < 1 ? fixedCostY1 / (1 - varCostRatio) : 0;
+        let breakEvenDaily = days > 0 ? breakEvenAnnual / days : 0;
+
         // --- UPDATE DASHBOARD DOM ---
         document.getElementById('out-total-cap').innerText = fmt.format(totalCap);
-        document.getElementById('out-equity-req').innerText = `Equity (Cash Req): ${fmt.format(equity)}`;
+        document.getElementById('out-equity-req').innerText = debt > 0 ? `Equity: ${fmt.format(equity)} | Debt: ${fmt.format(debt)}` : `100% Equity Financed`;
         
-        document.getElementById('out-y1-ebitda').innerText = fmt.format(years[0].ebitda);
-        document.getElementById('out-y1-ebitda-pct').innerText = `Margin: ${fmtPct(ratios[0].ebitdaMargin)}`;
+        document.getElementById('out-breakeven').innerText = fmt.format(breakEvenAnnual);
+        document.getElementById('out-breakeven-daily').innerText = `${fmt.format(breakEvenDaily)} / Day`;
         
-        document.getElementById('out-prime-pct').innerText = fmtPct(ratios[0].primeCostPct);
+        document.getElementById('out-5yr-fcf').innerText = fmt.format(totalFCF);
         
         document.getElementById('out-payback').innerText = paybackYear ? paybackYear.toFixed(1) + ' Yrs' : '> 5 Yrs';
-        document.getElementById('out-coc').innerText = `Y1 Cash-on-Cash: ${ratios[0].coc !== null ? fmtPct(ratios[0].coc) : 'Infinite'}`;
+        document.getElementById('out-coc').innerText = equity > 0 ? `Avg Cash-on-Cash: ${fmtPct(totalCoc / 5)}` : 'Infinite (No Equity)';
 
-        // --- RENDER PROFORMA RAW DOLLARS TABLE ---
+        // --- RENDER TABLES ---
         const tbody = document.getElementById('proforma-body');
         const rawRows = [
-            { label: "Gross Sales", key: "sales", style: "font-weight: bold; color: #1a202c;" },
-            { label: "Cost of Goods Sold (COGS)", key: "cogs", style: "color: #e53e3e;" },
-            { label: "Total Labor (inc. tax/ben)", key: "totalLabor", style: "color: #e53e3e;" },
-            { label: "Prime Costs", key: "primeCost", style: "font-weight: bold; background: #edf2f7;" },
-            { label: "Gross Profit", key: "grossProfit", style: "font-weight: bold; color: #2b6cb0;" },
-            { label: "Total OPEX", key: "totalOpex", style: "color: #e53e3e;" },
-            { label: "EBITDA", key: "ebitda", style: "font-weight: 800; background: #e2e8f0; font-size: 1.05em;" },
-            { label: "Depreciation (Non-Cash)", key: "currentDep", style: "color: #718096;" },
-            { label: "Interest Expense", key: "interestPmt", style: "color: #718096;" },
-            { label: "Corporate Taxes", key: "taxes", style: "color: #e53e3e;" },
-            { label: "Net Income", key: "netIncome", style: "font-weight: bold;" },
-            { label: "Principal Repayment", key: "principalPmt", style: "color: #718096;" },
-            { label: "Free Cash Flow", key: "fcf", style: "font-weight: 800; color: #38a169; background: #f0fff4;" }
+            { label: "Gross Revenue", key: "sales", style: "font-weight: 600; color: #0f172a;" },
+            { label: "Cost of Goods Sold (COGS)", key: "cogs", style: "color: #b91c1c;" },
+            { label: "Total Labor (Inc. Payroll Taxes)", key: "totalLabor", style: "color: #b91c1c;" },
+            { label: "Prime Costs", key: "primeCost", style: "font-weight: 600; background: #f1f5f9;" },
+            { label: "Gross Profit", key: "grossProfit", style: "font-weight: 600; color: #0f172a;" },
+            { label: "Total OPEX", key: "totalOpex", style: "color: #b91c1c;" },
+            { label: "EBITDA", key: "ebitda", style: "font-weight: 700; background: #e2e8f0; font-size: 1.05em;" },
+            { label: "Depreciation (Non-Cash)", key: "currentDep", style: "color: #64748b;" },
+            { label: "Interest Expense", key: "interestPmt", style: "color: #64748b;" },
+            { label: "Corporate Taxes", key: "taxes", style: "color: #b91c1c;" },
+            { label: "Net Income", key: "netIncome", style: "font-weight: 600;" },
+            { label: "Principal Repayment", key: "principalPmt", style: "color: #64748b;" },
+            { label: "Free Cash Flow", key: "fcf", style: "font-weight: 700; color: #15803d; background: #f0fdf4;" }
         ];
 
         tbody.innerHTML = '';
         rawRows.forEach(r => {
             let tr = document.createElement('tr');
-            let tdLabel = `<td class="text-left p-3 border-r border-gray-200" style="${r.style}">${r.label}</td>`;
+            let tdLabel = `<td class="text-left p-3 border-r border-slate-200" style="${r.style}">${r.label}</td>`;
             let tdData = years.map(y => `<td class="p-3" style="${r.style}">${fmt.format(y[r.key])}</td>`).join('');
             tr.innerHTML = tdLabel + tdData;
             tbody.appendChild(tr);
         });
 
-        // --- RENDER KPI & RATIOS TABLE ---
         const rbody = document.getElementById('ratios-body');
         const ratioRows = [
             { label: "COGS %", key: "cogsPct", format: fmtPct },
             { label: "Labor %", key: "laborPct", format: fmtPct },
-            { label: "Prime Cost %", key: "primeCostPct", format: fmtPct, style: "font-weight: bold; background: #edf2f7;" },
-            { label: "EBITDA Margin %", key: "ebitdaMargin", format: fmtPct, style: "font-weight: bold; color: #2b6cb0;" },
-            { label: "Free Cash Flow Margin %", key: "fcfMargin", format: fmtPct, style: "font-weight: bold; color: #38a169;" },
+            { label: "Prime Cost %", key: "primeCostPct", format: fmtPct, style: "font-weight: 600; background: #f1f5f9;" },
+            { label: "EBITDA Margin %", key: "ebitdaMargin", format: fmtPct, style: "font-weight: 600; color: #0f172a;" },
+            { label: "Free Cash Flow Margin %", key: "fcfMargin", format: fmtPct, style: "font-weight: 600; color: #15803d;" },
             { label: "Cash-on-Cash Return", key: "coc", format: (v) => v !== null ? fmtPct(v) : 'N/A' },
-            { label: "DSCR (Coverage Ratio)", key: "dscr", format: (v) => v !== null ? fmtDec(v) : 'No Debt', style: "font-weight: bold; color: #805ad5;" }
+            { label: "DSCR (Coverage Ratio)", key: "dscr", format: (v) => v !== null ? fmtDec(v) : 'No Debt', style: "font-weight: 600; color: #475569;" }
         ];
 
         rbody.innerHTML = '';
         ratioRows.forEach(r => {
             let tr = document.createElement('tr');
-            let customStyle = r.style ? r.style : "color: #4a5568;";
-            let tdLabel = `<td class="text-left p-3 border-r border-gray-200 font-bold" style="color: #4a5568;">${r.label}</td>`;
+            let customStyle = r.style ? r.style : "color: #475569;";
+            let tdLabel = `<td class="text-left p-3 border-r border-slate-200 font-semibold" style="color: #334155;">${r.label}</td>`;
             let tdData = ratios.map(y => `<td class="p-3" style="${customStyle}">${r.format(y[r.key])}</td>`).join('');
             tr.innerHTML = tdLabel + tdData;
             rbody.appendChild(tr);
         });
     }
 
-    // Initialize calculation on load
+    // Run on load
     calculateProforma();
 </script>
 </body>
