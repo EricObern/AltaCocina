@@ -3,156 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Restaurant Proforma Engine</title>
+    <title>Institutional Restaurant Proforma & Capital Planner</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Hide up/down arrows on number inputs for a cleaner look */
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        input[type="number"] {
-            -moz-appearance: textfield;
-        }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #1c1917; }
-        ::-webkit-scrollbar-thumb { background: #44403c; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #57534e; }
-        
-        .scoll-pane {
-            max-height: 85vh;
-            overflow-y: auto;
-        }
+        /* Custom institutional styling */
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f6; }
+        .input-group { margin-bottom: 1rem; }
+        .input-group label { display: block; font-size: 0.75rem; font-weight: 600; color: #4a5568; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+        .input-group input { width: 100%; padding: 0.5rem; border: 1px solid #cbd5e0; border-radius: 0.375rem; font-family: 'SFMono-Regular', Consolas, "Liberation Mono", Menlo, monospace; font-size: 0.875rem; }
+        .input-group input:focus { outline: none; border-color: #2b6cb0; box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.2); }
+        .table-header { background-color: #1a202c; color: #fff; }
+        .metric-card { background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%); color: white; }
     </style>
 </head>
-<body class="bg-stone-950 text-stone-300 font-sans p-4 md:p-8">
+<body class="text-gray-800 antialiased">
 
-    <div class="max-w-7xl mx-auto">
-        <!-- Header -->
-        <header class="mb-6 border-b border-stone-800 pb-6 flex flex-col md:flex-row justify-between items-end">
-            <div>
-                <h1 class="text-3xl font-light text-stone-100 tracking-wide mb-2">UNIVERSAL PROFORMA ENGINE</h1>
-                <p class="text-stone-400 text-sm">Dynamic Financial Modeling for Hospitality Projects</p>
-            </div>
-            <div class="text-right mt-4 md:mt-0">
-                <p class="text-xs text-stone-500 uppercase tracking-widest">Est. Stabilized Yield (Yr 3)</p>
-                <p class="text-2xl text-emerald-400 font-semibold" id="roi-header">0.0%</p>
-            </div>
-        </header>
+<div class="max-w-screen-2xl mx-auto p-4 sm:p-8">
+    
+    <header class="mb-8 border-b border-gray-300 pb-4">
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Restaurant Unit Economics & 5-Year Proforma</h1>
+        <p class="text-sm text-gray-500 mt-1">Interactive Financial Modeling Tool • PE-Grade Calculation Matrix</p>
+    </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- LEFT COLUMN: INPUT PARAMETERS -->
+        <div class="lg:col-span-4 space-y-6">
             
-            <!-- CONTROLS COLUMN (Scrollable) -->
-            <div class="lg:col-span-4 bg-stone-900 border border-stone-800 rounded-lg p-6 shadow-xl scoll-pane">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-lg text-stone-100 font-medium">Model Variables</h2>
-                    <button onclick="loadAltaCocinaExample()" class="text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 py-1 px-3 rounded transition">Load Example Project</button>
-                </div>
-
-                <!-- 1. Revenue Projections -->
-                <div class="mb-6 border-b border-stone-800 pb-4">
-                    <h3 class="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-4">1. Top-Line Revenue</h3>
-                    
-                    <div class="mb-3 flex justify-between items-center">
-                        <label class="text-sm">Year 1 F&B Revenue ($)</label>
-                        <input type="number" id="in-rev-y1" class="w-32 bg-stone-950 border border-stone-700 rounded px-2 py-1 text-right text-stone-100 focus:outline-none focus:border-stone-500" value="6776250" oninput="updateModel()">
-                    </div>
-                    <div class="mb-3 flex justify-between items-center">
-                        <label class="text-sm">Year 2 F&B Revenue ($)</label>
-                        <input type="number" id="in-rev-y2" class="w-32 bg-stone-950 border border-stone-700 rounded px-2 py-1 text-right text-stone-100 focus:outline-none focus:border-stone-500" value="7679750" oninput="updateModel()">
-                    </div>
-                    <div class="mb-3 flex justify-between items-center">
-                        <label class="text-sm">Year 3 F&B Revenue ($)</label>
-                        <input type="number" id="in-rev-y3" class="w-32 bg-stone-950 border border-stone-700 rounded px-2 py-1 text-right text-stone-100 focus:outline-none focus:border-stone-500" value="8583250" oninput="updateModel()">
-                    </div>
-                    <div class="mb-3 flex justify-between items-center">
-                        <label class="text-sm text-emerald-200">House Service Charge (%)</label>
-                        <input type="number" id="in-sc" class="w-20 bg-stone-950 border border-stone-700 rounded px-2 py-1 text-right text-emerald-200 focus:outline-none focus:border-stone-500" value="22" oninput="updateModel()">
-                    </div>
-                </div>
-
-                <!-- 2. COGS & Labor -->
-                <div class="mb-6 border-b border-stone-800 pb-4">
-                    <h3 class="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-4">2. COGS & Labor Architecture</h3>
-                    
-                    <div class="mb-3 flex justify-between items-center">
-                        <label class="text-sm">Blended COGS (%)</label>
-                        <input type="number" id="in-cogs" class="w-20 bg-stone-950 border border-stone-700 rounded px-2 py-1 text-right text-stone-100 focus:outline-none focus:border-stone-500" value="30" oninput="updateModel()">
-                    </div>
-                    <div class="mb-3 flex justify-between items-center">
-                        <label class="text-sm">Fixed Labor Base ($/yr)</label>
-                        <input type="number" id="in-fixed-labor" class="w-32 bg-stone-950 border border-stone-700 rounded px-2 py-1 text-right text-stone-100 focus:outline-none focus:border-stone-500" value="2666876" oninput="updateModel()">
-                    </div>
-                    <div class="mb-3 flex justify-between items-center">
-                        <label class="text-sm">Variable Labor (% of Gross)</label>
-                        <input type="number" id="in-var-labor" step="0.1" class="w-20 bg-stone-950 border border-stone-700 rounded px-2 py-1 text-right text-stone-100 focus:outline-none focus:border-stone-500" value="15" oninput="updateModel()">
-                    </div>
-                </div>
-
-                <!-- 3. OpEx & Fees -->
-                <div class="mb-6 border-b border-stone-800 pb-4">
-                    <h3 class="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-4">3. Operating Expenses & Fees</h3>
-                    
-                    <div class="mb-3 flex justify-between items-center">
-                        <label class="text-sm flex flex-col">
-                            <span>Fixed OpEx Base ($/yr)</span>
-                            <span class="text-xs text-stone-600">Rent, Insurance, Software, etc.</span>
-                        </label>
-                        <input type="number" id="in-fixed-opex" class="w-32 bg-stone-950 border border-stone-700 rounded px-2 py-1 text-right text-stone-100 focus:outline-none focus:border-stone-500" value="1200000" oninput="updateModel()">
-                    </div>
-                    <div class="mb-3 flex justify-between items-center">
-                        <label class="text-sm">Variable OpEx (% of Gross)</label>
-                        <input type="number" id="in-var-opex" step="0.1" class="w-20 bg-stone-950 border border-stone-700 rounded px-2 py-1 text-right text-stone-100 focus:outline-none focus:border-stone-500" value="3.1" oninput="updateModel()">
-                    </div>
-                    <div class="mb-3 flex justify-between items-center">
-                        <label class="text-sm">Management Fee (% of Gross)</label>
-                        <input type="number" id="in-mgmt" step="0.1" class="w-20 bg-stone-950 border border-stone-700 rounded px-2 py-1 text-right text-stone-100 focus:outline-none focus:border-stone-500" value="2.0" oninput="updateModel()">
-                    </div>
-                    <div class="mb-3 flex justify-between items-center">
-                        <label class="text-sm">Credit Card Fees (% of Gross)</label>
-                        <input type="number" id="in-cc" step="0.1" class="w-20 bg-stone-950 border border-stone-700 rounded px-2 py-1 text-right text-stone-100 focus:outline-none focus:border-stone-500" value="3.0" oninput="updateModel()">
-                    </div>
-                </div>
-
-                <!-- 4. Capital -->
-                <div class="mb-2">
-                    <h3 class="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-4">4. Capital Requirements</h3>
-                    <div class="mb-3 flex justify-between items-center">
-                        <label class="text-sm">Project CapEx (Buildout & Capital)</label>
-                        <input type="number" id="in-capex" class="w-32 bg-stone-950 border border-stone-700 rounded px-2 py-1 text-right text-stone-100 font-bold focus:outline-none focus:border-stone-500" value="5736128" oninput="updateModel()">
-                    </div>
+            <!-- Capital & Setup -->
+            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+                <h2 class="text-lg font-bold text-gray-800 border-b pb-2 mb-4">1. CapEx & Financing</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="input-group"><label>Buildout / T.I. ($)</label><input type="number" id="inp-buildout" value="450000"></div>
+                    <div class="input-group"><label>FF&E (Eqpt/Fur) ($)</label><input type="number" id="inp-ffe" value="250000"></div>
+                    <div class="input-group"><label>Working Capital ($)</label><input type="number" id="inp-working-cap" value="100000"></div>
+                    <div class="input-group"><label>Depreciation (Yrs)</label><input type="number" id="inp-dep-yrs" value="7"></div>
+                    <div class="input-group"><label>Debt Financed ($)</label><input type="number" id="inp-debt" value="400000"></div>
+                    <div class="input-group"><label>Interest Rate (%)</label><input type="number" id="inp-interest" value="8.5" step="0.1"></div>
+                    <div class="input-group"><label>Loan Term (Yrs)</label><input type="number" id="inp-loan-term" value="5"></div>
+                    <div class="input-group"><label>Corp Tax Rate (%)</label><input type="number" id="inp-tax-rate" value="21"></div>
                 </div>
             </div>
 
-            <!-- OUTPUT COLUMN -->
-            <div class="lg:col-span-8 flex flex-col space-y-6">
-                
-                <!-- Financial Table -->
-                <div class="bg-stone-900 border border-stone-800 rounded-lg overflow-hidden shadow-xl">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-stone-950 border-b border-stone-800 text-stone-400 text-xs uppercase tracking-wider">
-                                <th class="p-4 font-medium w-1/3">Profit & Loss</th>
-                                <th class="p-4 font-medium text-right">Year 1</th>
-                                <th class="p-4 font-medium text-right">Year 2</th>
-                                <th class="p-4 font-medium text-right">Year 3</th>
+            <!-- Revenue Drivers -->
+            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+                <h2 class="text-lg font-bold text-gray-800 border-b pb-2 mb-4">2. Revenue Drivers</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="input-group"><label>Daily Covers/Txns</label><input type="number" id="inp-covers" value="350"></div>
+                    <div class="input-group"><label>Average Check ($)</label><input type="number" id="inp-check" value="28"></div>
+                    <div class="input-group"><label>Days Open / Year</label><input type="number" id="inp-days" value="350"></div>
+                    <div class="input-group"><label>YOY Sales Growth (%)</label><input type="number" id="inp-growth" value="4.0" step="0.1"></div>
+                </div>
+            </div>
+
+            <!-- Direct Costs (COGS & Labor) -->
+            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+                <h2 class="text-lg font-bold text-gray-800 border-b pb-2 mb-4">3. Prime Costs (COGS & Labor)</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="input-group"><label>Food & Bev Cost (%)</label><input type="number" id="inp-cogs" value="28.5" step="0.1"></div>
+                    <div class="input-group"><label>Paper & Pkg (%)</label><input type="number" id="inp-paper" value="2.0" step="0.1"></div>
+                    <div class="input-group"><label>Mgt Salaries ($/Yr)</label><input type="number" id="inp-salaries" value="140000"></div>
+                    <div class="input-group"><label>Hourly Labor ($/Day)</label><input type="number" id="inp-hourly" value="1200"></div>
+                    <div class="input-group"><label>Payroll Taxes/Ben (%)</label><input type="number" id="inp-benefits" value="18" step="0.1"></div>
+                    <div class="input-group"><label>YOY Labor Growth (%)</label><input type="number" id="inp-labor-growth" value="3.0" step="0.1"></div>
+                </div>
+            </div>
+
+            <!-- OpEx -->
+            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+                <h2 class="text-lg font-bold text-gray-800 border-b pb-2 mb-4">4. Operating Expenses (OPEX)</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="input-group"><label>Rent & NNN ($/Mo)</label><input type="number" id="inp-rent" value="8500"></div>
+                    <div class="input-group"><label>Utilities ($/Mo)</label><input type="number" id="inp-util" value="2500"></div>
+                    <div class="input-group"><label>Marketing (% Sales)</label><input type="number" id="inp-marketing" value="2.5" step="0.1"></div>
+                    <div class="input-group"><label>R&M (% Sales)</label><input type="number" id="inp-rm" value="1.5" step="0.1"></div>
+                    <div class="input-group"><label>CC Fees (%)</label><input type="number" id="inp-cc" value="2.8" step="0.1"></div>
+                    <div class="input-group"><label>Insurance/G&A ($/Mo)</label><input type="number" id="inp-ga" value="1800"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: OUTPUTS & PROFORMA -->
+        <div class="lg:col-span-8 space-y-6">
+            
+            <!-- Dashboard Key Metrics -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="metric-card p-4 rounded-lg shadow">
+                    <p class="text-xs font-bold uppercase tracking-wider opacity-80">Total Capital Needed</p>
+                    <h3 class="text-2xl font-mono mt-1" id="out-total-cap">$0</h3>
+                    <p class="text-xs mt-1" id="out-equity-req">Equity: $0</p>
+                </div>
+                <div class="metric-card p-4 rounded-lg shadow">
+                    <p class="text-xs font-bold uppercase tracking-wider opacity-80">Year 1 EBITDA</p>
+                    <h3 class="text-2xl font-mono mt-1" id="out-y1-ebitda">$0</h3>
+                    <p class="text-xs mt-1" id="out-y1-ebitda-pct">Margin: 0%</p>
+                </div>
+                <div class="metric-card p-4 rounded-lg shadow">
+                    <p class="text-xs font-bold uppercase tracking-wider opacity-80">Prime Cost (Y1)</p>
+                    <h3 class="text-2xl font-mono mt-1" id="out-prime-pct">0%</h3>
+                    <p class="text-xs mt-1">Target: < 60%</p>
+                </div>
+                <div class="metric-card p-4 rounded-lg shadow">
+                    <p class="text-xs font-bold uppercase tracking-wider opacity-80">Payback Period</p>
+                    <h3 class="text-2xl font-mono mt-1" id="out-payback">0 Yrs</h3>
+                    <p class="text-xs mt-1" id="out-coc">Cash-on-Cash: 0%</p>
+                </div>
+            </div>
+
+            <!-- Proforma Table -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div class="p-4 border-b border-gray-200 bg-gray-50 flex justify-between items-center">
+                    <h2 class="text-lg font-bold text-gray-800">5-Year Financial Proforma</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-right font-mono whitespace-nowrap">
+                        <thead class="table-header">
+                            <tr>
+                                <th class="text-left p-3">P&L Item</th>
+                                <th class="p-3">Year 1</th>
+                                <th class="p-3">Year 2</th>
+                                <th class="p-3">Year 3</th>
+                                <th class="p-3">Year 4</th>
+                                <th class="p-3">Year 5</th>
                             </tr>
                         </thead>
-                        <tbody class="text-sm md:text-base">
-                            <!-- Revenue -->
-                            <tr class="border-b border-stone-800/50 hover:bg-stone-800/20 transition">
-                                <td class="p-4 text-stone-300">Food & Beverage Revenue</td>
-                                <td class="p-4 text-right" id="out-fb-y1">-</td>
-                                <td class="p-4 text-right" id="out-fb-y2">-</td>
-                                <td class="p-4 text-right" id="out-fb-y3">-</td>
-                            </tr>
-                            <tr class="border-b border-stone-800/50 hover:bg-stone-800/20 transition">
-                                <td class="p-4 text-emerald-200/80">House Service Charge</td>
-                                <td class="p-4 text-right text-emerald-200/80" id="out-sc-y1">-</td>
-                                <td class="p-4 text-right text-emerald-200/80" id="out-sc-y2">-</td>
-                                <td class="p-4 text-right text-emerald-200/80" id="out-sc-y3">-</td>
-                            </tr>
-                            <tr class="border-b border-stone-800 bg-stone-800/30 font-semibold">
-                                <td class="p-4 text-stone-100">T
+                        <tbody id="proforma-body" class="divide-y divide-gray-200">
+                            <!-- Injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Debt Service Schedule Summary -->
+            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+                <h2 class="text-lg font-bold text-gray-800 border-b pb-2 mb-4">Capital Structure & Debt Service</h2>
+                <div class="grid grid-cols-3 gap-4 font-mono text-sm">
+                    <div><span class="block text-xs text-gray-500 font-sans font-bold">Annual Debt Payment (PMT)</span><span id="out-annual-pmt" class="text-lg text-red-600 font-bold">$0</span></div>
+                    <div><span class="block text-xs text-gray-500 font-sans font-bold">Total Interest Paid</span><span id="out-total-interest">$0</span></div>
+                    <div><span class="block text-xs text-gray-500 font-sans font-bold">Annual Depreciation</span><span id="out-annual-dep">$0</span></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // Utility for Currency Formatting
+    const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    const fmtPct = (val) => (val * 100).toFixed(1) + '%';
+
+    // Get all inputs
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => input.addEventListener('input', calculateProforma));
+
+    function getVal(id) { return parseFloat(document.getElementById(id).value) || 0; }
+
+    function pmt(rate, nper, pv) {
+        if (rate === 0) return pv / nper;
+        return (pv * rate * Math.pow(1 + rate, nper)) / (Math.pow(1 + rate, nper) - 1);
+    }
+
+    function calculateProforma() {
+        // 1. CapEx
+        const buildout = getVal('inp-buildout');
+        const ffe = getVal('inp-ffe');
+        const workingCap = getVal('inp-working-cap');
+        const totalCap = buildout + ffe + workingCap;
+        const debt = getVal('inp-debt');
+        const equity = Math.max(0, totalCap - debt);
+        const depYrs = getVal('inp-dep-yrs');
+        const annualDep = depYrs > 0 ? (buildout + ffe) / depYrs : 0;
+        
+        // Debt Math
+        const intRate = getVal('inp-interest') / 100;
+        const loanTerm = getVal('inp-loan-term');
+        const annualPmt = loanTerm > 0 ? pmt(intRate, loanTerm, debt) : 0;
+        const taxRate = getVal('inp-tax-rate') / 100;
+
+        // 2. Revenue Setup
+        const covers = getVal('inp-covers');
+        const check = getVal('inp-check');
+        const days = getVal('inp-days');
+        const salesY1 = covers * check * days;
+        const revGrowth = getVal('inp-growth') / 100;
+
+        // 3. Costs Setup
+        const cogsPct = (getVal('inp-cogs') + getVal('inp-paper')) / 100;
+        const mgtSalaries = getVal('inp-salaries');
+        const hourlyLabor = getVal('inp-hourly') * days;
+        const benefitsPct = 1 + (getVal('inp-benefits') / 100);
+        const laborGrowth = getVal('inp-labor-growth') / 100;
+
+        // 4. OPEX Setup
+        const rentAnnual = getVal('inp-rent') * 12;
+        const utilAnnual = getVal('inp-util') * 12;
+        const gaAnnual = getVal('inp-ga') * 12;
+        const mktPct = getVal('inp-marketing') / 100;
+        const rmPct = getVal('inp-rm') / 100;
+        const ccPct = getVal('inp-cc') / 100;
+
+        // Proforma Arrays
+        let years = [];
+        let remainingDebt = debt;
+        let cumulativeCashFlow = -equity; // For Payback Period
+        let paybackYear = null;
+
+        for (let i = 1; i <= 5; i++) {
+            // Revenue
+            let sales = salesY1 * Math.pow(1 + revGrowth, i - 1);
+            
+            // COGS
+            let cogs = sales * cogsPct;
+            
+            // Labor
+            let currentSalaries = mgtSalaries * Math.pow(1 + laborGrowth, i - 1);
+            let currentHourly = hourlyLabor * Math.pow(1 + laborGrowth, i - 1);
+            let totalLabor = (currentSalaries + currentHourly) * benefitsPct;
+
+            let primeCost = cogs + totalLabor;
+            let grossProfit = sales - primeCost;
+
+            // Variable OPEX
+            let marketing = sales * mktPct;
+            let rm = sales * rmPct;
+            let ccFees = sales * ccPct; // Assuming 100% CC capture for conservatism
+            
+            // Fixed OPEX (Assuming 2% inflation on fixed costs for realism)
+            let currentRent = rentAnnual * Math.pow(1.02, i - 1);
+            let currentUtil = utilAnnual * Math.pow(1.02, i - 1);
+            let currentGA = gaAnnual * Math.pow(1.02, i - 1);
+
+            let totalOpex = marketing + rm + ccFees + currentRent + currentUtil + currentGA;
+
+            // EBITDA
+            let ebitda = grossProfit - totalOpex;
+
+            // Interest & Principal (Amortization logic)
+            let interestPmt = 0;
+            let principalPmt = 0;
+            if (i <= loanTerm && remainingDebt > 0) {
+                interestPmt = remainingDebt * intRate;
+                principalPmt = annualPmt - interestPmt;
+                remainingDebt -= principalPmt;
+            }
+
+            // Depreciation mapping
+            let currentDep = i <= depYrs ? annualDep : 0;
+
+            // EBT & Taxes
+            let ebt = ebitda - interestPmt - currentDep;
+            let taxes = ebt > 0 ? ebt * taxRate : 0;
+
+            // Net Income
+            let netIncome = ebt - taxes;
+
+            // Free Cash Flow (Net Income + Depreciation - Principal Payment - CapEx (assumed 0 here post-open))
+            let fcf = netIncome + currentDep - principalPmt;
+
+            // Payback Period Logic
+            cumulativeCashFlow += fcf;
+            if (cumulativeCashFlow >= 0 && paybackYear === null) {
+                // Linear interpolation for exact fraction of the year
+                let previousCash = cumulativeCashFlow - fcf;
+                let fraction = Math.abs(previousCash) / fcf;
+                paybackYear = (i - 1) + fraction;
+            }
+
+            years.push({
+                sales, cogs, totalLabor, primeCost, grossProfit, 
+                totalOpex, ebitda, currentDep, interestPmt, principalPmt, 
+                taxes, netIncome, fcf
+            });
+        }
+
+        // --- UPDATE DASHBOARD DOM ---
+        document.getElementById('out-total-cap').innerText = fmt.format(totalCap);
+        document.getElementById('out-equity-req').innerText = `Equity (Cash Req): ${fmt.format(equity)}`;
+        
+        document.getElementById('out-y1-ebitda').innerText = fmt.format(years[0].ebitda);
+        document.getElementById('out-y1-ebitda-pct').innerText = `Margin: ${fmtPct(years[0].ebitda / years[0].sales)}`;
+        
+        document.getElementById('out-prime-pct').innerText = fmtPct(years[0].primeCost / years[0].sales);
+        
+        document.getElementById('out-payback').innerText = paybackYear ? paybackYear.toFixed(1) + ' Yrs' : '> 5 Yrs';
+        let coc = equity > 0 ? (years[0].fcf / equity) : 0;
+        document.getElementById('out-coc').innerText = `Y1 Cash-on-Cash: ${fmtPct(coc)}`;
+
+        document.getElementById('out-annual-pmt').innerText = fmt.format(annualPmt);
+        document.getElementById('out-annual-dep').innerText = fmt.format(annualDep);
+        
+        let totalInt = (annualPmt * loanTerm) - debt;
+        document.getElementById('out-total-interest').innerText = debt > 0 ? fmt.format(totalInt) : '$0';
+
+        // --- RENDER PROFORMA TABLE ---
+        const tbody = document.getElementById('proforma-body');
+        
+        const rows = [
+            { label: "Gross Sales", key: "sales", style: "font-weight: bold; color: #1a202c;" },
+            { label: "Cost of Goods Sold (COGS)", key: "cogs", style: "color: #e53e3e;" },
+            { label: "Total Labor (inc. tax/ben)", key: "totalLabor", style: "color: #e53e3e;" },
+            { label: "Prime Costs", key: "primeCost", style: "font-weight: bold; background: #edf2f7;" },
+            { label: "Gross Profit", key: "grossProfit", style: "font-weight: bold; color: #2b6cb0;" },
+            { label: "Total OPEX", key: "totalOpex", style: "color: #e53e3e;" },
+            { label: "EBITDA", key: "ebitda", style: "font-weight: 800; background: #e2e8f0; font-size: 1.05em;" },
+            { label: "Depreciation", key: "currentDep", style: "color: #718096;" },
+            { label: "Interest Expense", key: "interestPmt", style: "color: #718096;" },
+            { label: "Taxes", key: "taxes", style: "color: #e53e3e;" },
+            { label: "Net Income", key: "netIncome", style: "font-weight: bold;" },
+            { label: "Principal Repayment", key: "principalPmt", style: "color: #718096;" },
+            { label: "Free Cash Flow", key: "fcf", style: "font-weight: 800; color: #38a169; background: #f0fff4;" }
+        ];
+
+        tbody.innerHTML = '';
+        rows.forEach(r => {
+            let tr = document.createElement('tr');
+            let tdLabel = `<td class="text-left p-3 border-r border-gray-200" style="${r.style}">${r.label}</td>`;
+            let tdData = years.map(y => `<td class="p-3" style="${r.style}">${fmt.format(y[r.key])}</td>`).join('');
+            tr.innerHTML = tdLabel + tdData;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // Initialize calculation on load
+    calculateProforma();
+</script>
+</body>
+</html>
